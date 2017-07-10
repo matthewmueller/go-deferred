@@ -41,7 +41,8 @@ func (d *Deferred) Reject(err error) {
 	})
 }
 
-// Wait gets the value after the function has been resolved
+// Wait returns a value if the deferred was resolved or
+// an error if the deferred was rejected or cancelled
 func (d *Deferred) Wait() (v interface{}, err error) {
 	select {
 	case <-d.resolved:
