@@ -25,6 +25,11 @@ go func() {
 }()
 
 d.Resolve("a")
+d.Reject(errors.New("oh no")) // no-op
+d.Resolve("hi") // no-op
+v, err := d.Wait()
+assert.Equal(t, "a", v) // always "a"
+assert.Nil(t, err) // always nil
 wg.Wait()
 ```
 
